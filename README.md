@@ -55,7 +55,7 @@ This project demonstrates how to build AWS infrastructure with Terraform:
 
     aws configure
 
-    or via SSO:
+or via SSO:
 
     aws sso login --profile my-profile
 
