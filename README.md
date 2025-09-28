@@ -67,6 +67,21 @@ aws sso login --profile my-profile
 
 ---
 
+## Terraform Bootstrap HOWTO
+
+This module creates an S3 bucket for storing Terraform remote state.
+
+### Usage
+
+```bash
+cd bootstrap/
+terraform init
+terraform validate
+terraform apply
+```
+
+---
+
 ## ▶️ Deployment Steps (Mono-state)
 
 ```bash

@@ -1,6 +1,6 @@
 terraform {
   backend "s3" {
-    bucket         = "terraform-states"
+    bucket         = "goitneo-oleg-terraform-states"
     key            = "eks-vpc-cluster/terraform.tfstate"
     region         = "eu-central-1"
     use_lockfile   = true
