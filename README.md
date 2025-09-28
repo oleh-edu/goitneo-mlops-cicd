@@ -53,9 +53,9 @@ This project demonstrates how to build AWS infrastructure with Terraform:
 2. Install [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)
 3. Configure AWS credentials:
 
-    `aws configure`
+    aws configure
 
-or via SSO:
+    or via SSO:
 
     aws sso login --profile my-profile
 
