@@ -7,10 +7,10 @@ This project demonstrates how to export a pretrained PyTorch model (MobileNetV2)
 ## 1. Environment Setup (local machine)
 
 Run the setup script:
-    ```shell
+
     chmod +x install_dev_tools.sh
     ./install_dev_tools.sh
-    ```
+
 What it does:
 
 - Installs Docker + Compose plugin (if missing).
@@ -23,18 +23,15 @@ What it does:
 
 ## 2. Export TorchScript Model
 
-    ```shell
     $PY_BIN export_model.py   # creates model.pt in current directory
-    ```
+
 By default $PY_BIN is set to the chosen Python interpreter (3.12 on Fedora 41).
 
 ---
 
 ## 3. Local Inference
 
-    ```shell
     $PY_BIN inference.py image.png --model model.pt --topk 3
-    ```
 
 Example output:
 
@@ -49,27 +46,22 @@ Example output:
 
 ### Fat image (Fedora 41, >1GB)
 
-    ```shell
     docker build -f Dockerfile.fat -t mobilenet-fat:latest .
-    ```
 
 ### Slim image (multi-stage, Fedora 41, minimal runtime)
 
-    ```shell
     docker build -f Dockerfile.slim -t mobilenet-slim:latest .
-    ```
 
 ---
 
 ## 5. Run Containers
 
 Run inference inside the container with a mounted image:
-    ```shell
+
     docker run --rm -v $PWD:/work -w /work mobilenet-fat:latest images/image.png --model model.pt --topk 3
-    ```
-    ```shell
+
     docker run --rm -v $PWD:/work -w /work mobilenet-slim:latest images/image.png --model model.pt --topk 3
-    ```
+
 Note: On first run, inference.py may download imagenet_classes.txt.
 
 ---
@@ -77,6 +69,5 @@ Note: On first run, inference.py may download imagenet_classes.txt.
 ## 6. Report
 
 Run the helper script to generate `report.md` with image sizes, layer counts, and optimization notes:
-    ```shell
+
     ./generate_report.sh
-    ```
