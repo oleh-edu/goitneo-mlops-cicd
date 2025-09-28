@@ -10,22 +10,24 @@ This project demonstrates how to build AWS infrastructure with Terraform:
 
 ## 📦 Project Structure
 
-    eks-vpc-cluster/
-    ├── main.tf          # imports vpc/ and eks/ modules
+```bash
+eks-vpc-cluster/
+├── main.tf          # imports vpc/ and eks/ modules
+├── variables.tf
+├── outputs.tf
+├── terraform.tf
+├── backend.tf       # backend (local or S3)
+├── vpc/
+│   ├── main.tf
+│   ├── variables.tf
+│   ├── outputs.tf
+│   └── terraform.tf
+└── eks/
+    ├── main.tf
     ├── variables.tf
     ├── outputs.tf
-    ├── terraform.tf
-    ├── backend.tf       # backend (local or S3)
-    ├── vpc/
-    │   ├── main.tf
-    │   ├── variables.tf
-    │   ├── outputs.tf
-    │   └── terraform.tf
-    └── eks/
-        ├── main.tf
-        ├── variables.tf
-        ├── outputs.tf
-        └── terraform.tf
+    └── terraform.tf
+```
 
 ---
 
@@ -53,22 +55,28 @@ This project demonstrates how to build AWS infrastructure with Terraform:
 2. Install [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)
 3. Configure AWS credentials:  
 
-    aws configure
+```bash
+aws configure
+```
 
 or via SSO:
 
-    aws sso login --profile my-profile
+```bash
+aws sso login --profile my-profile
+```
 
 ---
 
 ## ▶️ Deployment Steps (Mono-state)
 
-    cd eks-vpc-cluster/
+```bash
+cd eks-vpc-cluster/
 
-    terraform init -reconfigure
-    terraform validate
-    terraform plan
-    terraform apply
+terraform init -reconfigure
+terraform validate
+terraform plan
+terraform apply
+```
 
 This will create:
 
@@ -82,11 +90,15 @@ This will create:
 
 Update kubeconfig:
 
-    aws eks --region eu-central-1 update-kubeconfig --name eks-cluster
+```bash
+aws eks --region eu-central-1 update-kubeconfig --name eks-cluster
+```
 
 Check nodes:
 
-    kubectl get nodes
+```bash
+kubectl get nodes
+```
 
 You should see both node groups (`cpu-nodes`, `gpu-nodes`).
 
@@ -94,7 +106,9 @@ You should see both node groups (`cpu-nodes`, `gpu-nodes`).
 
 ## 🧹 Destroying Infrastructure
 
-    terraform destroy
+```bash
+terraform destroy
+```
 
 ⚠️ This will remove the entire infrastructure (cluster, VPC, nodes).
 
