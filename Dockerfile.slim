@@ -1,0 +1,39 @@
+# ---- Builder stage ----
+FROM fedora:41 AS builder
+ENV PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1
+
+RUN dnf -y update && \
+    dnf -y install python3.12 python3.12-devel gcc gcc-c++ make && \
+    dnf clean all && \
+    alternatives --install /usr/bin/python3 python3 /usr/bin/python3.12 1 && \
+    python3 -m ensurepip --upgrade && \
+    python3 -m pip install --upgrade pip && \
+    python3 -m venv /opt/venv && \
+    /opt/venv/bin/pip install --no-cache-dir \
+      torch torchvision --index-url https://download.pytorch.org/whl/cpu \
+      pillow \
+    && (/opt/venv/bin/pip install --no-cache-dir Django || dnf -y install python3-django)
+
+WORKDIR /opt/app
+COPY inference.py /opt/app/inference.py
+COPY model.pt /opt/app/model.pt
+
+# ---- Runtime stage ----
+FROM fedora:41
+ENV PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1
+
+RUN dnf -y update && \
+    dnf -y install python3.12 libjpeg-turbo libpng && \
+    dnf clean all && \
+    alternatives --install /usr/bin/python3 python3 /usr/bin/python3.12 1
+
+# Copy venv from builder
+COPY --from=builder /opt/venv /opt/venv
+ENV PATH="/opt/venv/bin:$PATH"
+
+WORKDIR /app
+COPY --from=builder /opt/app /app
+
+ENTRYPOINT ["python3", "/app/inference.py"]
