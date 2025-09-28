@@ -208,4 +208,5 @@ __marimo__/
 
 # Terraform
 .terraform/
+.terraform.lock.hcl
 

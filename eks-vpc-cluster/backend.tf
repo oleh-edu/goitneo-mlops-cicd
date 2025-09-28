@@ -7,3 +7,11 @@ terraform {
     encrypt        = true
   }
 }
+
+/*
+terraform {
+  backend "local" {
+    path = "./terraform.tfstate"
+  }
+}
+*/
