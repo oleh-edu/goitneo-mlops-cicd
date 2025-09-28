@@ -11,6 +11,9 @@ This project demonstrates how to build AWS infrastructure with Terraform:
 ## 📦 Project Structure
 
 ```bash
+bootstrap/
+└── main.tf          # create an S3 bucket for Terraform state
+
 eks-vpc-cluster/
 ├── main.tf          # imports vpc/ and eks/ modules
 ├── variables.tf
