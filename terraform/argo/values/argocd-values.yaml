@@ -1,0 +1,17 @@
+server:
+  service:
+    type: LoadBalancer
+  ingress:
+    enabled: false
+
+controller:
+  replicas: 1
+
+repoServer:
+  replicas: 1
+
+dex:
+  enabled: false
+
+redis:
+  enabled: true
