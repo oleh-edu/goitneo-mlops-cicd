@@ -23,7 +23,6 @@ terraform/argocd/
 
 - An AWS EKS cluster is already created and accessible in `~/.kube/config`.
 - An S3 bucket `goitneo-oleg-terraform-states` exists for Terraform state storage.
-- (Recommended) A DynamoDB table for state locking.
 
 ---
 
