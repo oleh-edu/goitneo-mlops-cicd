@@ -1,5 +1,7 @@
 provider "helm" {
-  # No attributes needed here for kubeconfig path
+  kubernetes {
+    config_path = "~/.kube/config"
+  }
 }
 
 provider "kubernetes" {
