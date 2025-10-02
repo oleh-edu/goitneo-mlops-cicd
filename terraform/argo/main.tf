@@ -19,6 +19,6 @@ resource "helm_release" "argocd" {
   repository = "https://argoproj.github.io/argo-helm"
   chart      = "argo-cd"
   namespace  = kubernetes_namespace.infra_tools.metadata[0].name
-  version    = "6.7.12" # current on ArtifactHub
+  version    = "8.5.8" # current on ArtifactHub
   values     = [file("${path.module}/values/argocd-values.yaml")]
 }
