@@ -15,3 +15,10 @@ dex:
 
 redis:
   enabled: true
+
+configs:
+  rbac:
+    policy.csv: |
+      p, role:readonly, applications, get, */*, allow
+      g, myteam, role:readonly
+    scopes: "[groups]"
