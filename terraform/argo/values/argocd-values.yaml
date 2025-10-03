@@ -3,22 +3,21 @@ server:
     type: ClusterIP
   ingress:
     enabled: false
-
+  metrics:
+    enabled: true
 controller:
   replicas: 1
-
+  metrics:
+    enabled: true
 repoServer:
   replicas: 1
-
+  metrics:
+    enabled: true
 dex:
   enabled: false
-
-redis:
-  enabled: true
-
 configs:
-  rbac:
-    policy.csv: |
-      p, role:readonly, applications, get, */*, allow
-      g, myteam, role:readonly
-    scopes: "[groups]"
+ params:
+    server.insecure: "false"
+applicationSet:
+  metrics:
+    enabled: true
